@@ -38,4 +38,22 @@ typedef struct JSONObject_tag {
   JSONPair *header;
 } JSONObject;
 
+static JSONObject *object = NULL;
+static int tab_count = 0;
+
+void print_array(JSONArray *arr);
+void print_object(JSONObject *obj);
+void set_current_object(JSONObject *obj);
+JSONObject* get_current_object();
+JSONObject* create_object();
+void print_value(JSONValue *value);
+JSONArray* append_to_array(JSONArray *array, JSONValue *value);
+JSONObject* append_pair(JSONObject *obj, JSONPair *pair) ;
+void print_array(JSONArray *array) ;
+void print_pair(JSONPair *pair) ;
+void print_indent() ;
+void print_object(JSONObject *obj) ;
+void compile(JSONObject *obj, FILE *fp);
+void interpret(JSONObject *obj);
+
 #endif /* JSON_H */

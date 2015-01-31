@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "json.h"
-#include "printer.h"
 #define YYDEBUG 1
   
 %}
@@ -37,8 +36,9 @@
 object_expression
     : LC pair_expression_list RC
 	{
-	  print_object($2);
 	  $$ = $2;
+	  JSONObject *obj = get_current_object();
+    	obj->header = $$->header;
 	}
 	;
 
@@ -147,33 +147,11 @@ primary_expression
 	;
 
 %%
-
+#include "json.h"
 int
 yyerror(char const *str)
 {
     extern char *yytext;
     fprintf(stderr, "parser error near %s\n", yytext);
     return 0;
-}
-
-int main(int argc, char **argv)
-{
-    extern int yyparse(void);
-    extern FILE *yyin;
-
-	FILE *fp;
-	if (argc > 1)
-    {
-	  fp = fopen(argv[1], "r");
-	  yyin = fp;
-    }
-	else
-    {
-      yyin = stdin;		
-    }
-
-    if (yyparse()) {
-        fprintf(stderr, "Error ! Error ! Error !\n");
-        exit(1);
-    }
 }
