@@ -1,0 +1,19 @@
+{
+	"double": 1.2,
+	"str": "james",
+	"int": 123,	
+	"array": [1,2,3],
+	"bool": true,
+	"nested_object": {
+		"n1":"n1_value",
+		"haha": {
+			"james": {
+				"bond": {
+					"lala": {
+						"zhazha": 123
+					}
+				}
+			}
+		}
+	}
+}
