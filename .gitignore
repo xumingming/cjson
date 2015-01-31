@@ -1,3 +1,6 @@
 json
 y.output
 json.dSYM
+lex.yy.c
+y.tab.c
+y.tab.h
