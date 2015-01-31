@@ -15,7 +15,6 @@ static int curr_size = 0;
 void
 open_string_literal()
 {
-  //  printf("open string literal\n");
   for (int i = 0; i < 1024; i++)
   {
 	buffer[i] = '\0';
@@ -26,7 +25,6 @@ open_string_literal()
 void
 append_char(char x)
 {
-//  printf("append char: %c\n", x);
   buffer[curr_size] = x;
   curr_size++;
 }
@@ -34,12 +32,10 @@ append_char(char x)
 char *
 close_string_literal()
 {
-//  printf("close string literal\n");
   buffer[curr_size] = '\0';
   char *ret;
   ret = malloc(curr_size);
   memcpy(ret, buffer, curr_size);
-//  printf("str: %s\n", ret);
   return ret;
 }
 

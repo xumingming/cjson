@@ -39,71 +39,31 @@ object_expression
 	{
 	  print_object($2);
 	  $$ = $2;
-	  //	  printf("I am an object!!!");
 	}
 	;
 
 pair_expression_list
     : pair_expression
 	{
-	  //printf("In pair_expression_list: ");	  
 	  JSONObject* obj = malloc(sizeof(JSONObject));
 	  obj->header = $1;
 	  obj->header->next = NULL;
-	  //obj->header->key = "I am a test";
-	  
-	  
-	  //	  printf(" header: %s: ", obj.header->key);
-	  //	  print_value(obj.header->value);
-	  //	  printf("\n");
-
       $$ = obj;
-	  //	  print_object(obj);
 	}
 	| pair_expression_list COMMA pair_expression
 	{
-	  //printf("In pair_expression_list1: ");
-	  //	  printf(" %s -> %s \n",
-	  //			 $1->header->key,
-	  //			 $3->key);x-alternatives-map
-	  //	  print_value($3->value);
-	  //	  print_value($1->header->value);
-
 	  $$ = append_pair($1, $3);
-	  //	  JSONObject *temp = $1;
-	  //	  print_object(temp);
-	  //	  print_value($3->value);	  
-
-	  //	  JSONPair *pair = $3;
-	  //	  pair->next = temp->header;
-	  //	  temp->header = pair;
-
-	  //printf("In pair_expression_list2: ");
-	  //	  printf(" %s -> %s \n", $1->header->key, $1->header->next->key);
-	  
-	  //	  $$ = temp;
-	  //	  print_object($$);
 	}
 	;
 
 pair_expression
     : STRING_LITERAL COLON value_expression
 	{
-	  //JSONPair pair = {$1, $3, NULL};
-	  //	  pair.key = $1;
-	  //pair.value = $3;
-	  //	  $$ = &pair;	  
 	  JSONPair *pair = malloc(sizeof(JSONPair));
 	  pair->key = $1;
 	  pair->value = $3;
 	  pair->next = NULL;
 	  $$ = pair;
-	  
-
-	  //	  printf("In pair_expression:  ");
-	  //	  printf("%s -> ", $$->key);
-	  //	  print_value($$->value);
-	  //	  printf("\n");
 	}
 	;
 
@@ -111,8 +71,6 @@ array_expression
     : LB expression_list RB
 	{
 	  $$ = $2;
-	  //	  printf("array_expression:");
-	  //	  print_array($$);
 	}
     ;
 
@@ -122,17 +80,10 @@ expression_list
 	  JSONArray *array = malloc(sizeof(JSONArray));
 	  array->header = $1;
 	  $$ = array;
-	  //	  printf("comes a json array! %p, %p\n", &array, array.header->next);
-	  //	  print_array(&array);	  	  
 	}
 	| expression_list COMMA value_expression
 	{
-	  //	  printf("append %d to the array\n", $3->u.int_or_bool_value);
 	  $$ = append_to_array($1, $3);
-	  //	  append_to_array($1, $3);
-	  //$$ = $1;
-	  
-	  //	  print_array($$);	  	  
 	}
 	;
 
@@ -140,9 +91,6 @@ value_expression
 	: primary_expression
 	{
 	  $$ = $1;
-	  //	  printf("In value_expression:  ");
-	  //	  print_value($$);
-	  //	  printf("\n");
 	}
     | array_expression
 	{
